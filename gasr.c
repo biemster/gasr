@@ -1,6 +1,8 @@
 #include <iostream>
+#include <fstream>
 #include <vector>
 #include <string.h>
+#include <unistd.h>
 
 #ifdef __cplusplus
 extern "C" {
@@ -38,11 +40,10 @@ extern void DeleteSodaAsync(void* soda_async_handle);
 
 // Feeds raw audio to SODA in the form of a contiguous stream of characters.
 extern void AddAudio(void* soda_async_handle, const char* audio_buffer, int audio_buffer_size);
-
-
 #ifdef __cplusplus
 }
 #endif
+
 
 using namespace std;
 
@@ -51,8 +52,21 @@ void resultHandler(const char* text, const bool isFinal, void* instance) {
 }
 
 int main(int argc, char *argv[]) {
-	SodaConfig config = {1, 22050, "./SODAFiles/", resultHandler, nullptr, "api_key_dummy"};
+	SodaConfig config = {1, 16000, "./SODAModels/", resultHandler, nullptr, "api_key_dummy"};
 	void* handle = CreateSodaAsync(config);
+
+	ifstream stream("whatstheweatherlike.wav", ios::in | ios::binary);
+	vector<char> audio((istreambuf_iterator<char>(stream)), istreambuf_iterator<char>());
+	int data_start = 42;
+	int data_len = *(int*)&audio[data_start -2];
+	if(string(&audio[data_start -6], 4) == "data" && data_len < audio.size()) {
+		AddAudio(handle, &audio[data_start], data_len);
+		sleep(3); // give everything some time to do their thing
+	}
+	else {
+		cout << "Error reading wav file" << endl;
+	}
+
 	DeleteSodaAsync(handle);
 
 	return 0;
