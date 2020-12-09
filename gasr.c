@@ -8,26 +8,26 @@ extern "C" {
 typedef void (*RecognitionResultHandler)(const char*, const bool, void*);
 
 typedef struct {
-  // The channel count and sample rate of the audio stream. SODA does not
-  // support changing these values mid-stream, so a new SODA instance must be
-  // created if these values change.
-  int channel_count;
-  int sample_rate;
+	// The channel count and sample rate of the audio stream. SODA does not
+	// support changing these values mid-stream, so a new SODA instance must be
+	// created if these values change.
+	int channel_count;
+	int sample_rate;
 
-  // The fully-qualified path to the language pack.
-  const char* language_pack_directory;
+	// The fully-qualified path to the language pack.
+	const char* language_pack_directory;
 
-  // The callback that gets executed on a recognition event. It takes in a
-  // char*, representing the transcribed text; a bool, representing whether the
-  // result is final or not; and a void* pointer to the SodaRecognizerImpl
-  // instance associated with the stream.
-  RecognitionResultHandler callback;
+	// The callback that gets executed on a recognition event. It takes in a
+	// char*, representing the transcribed text; a bool, representing whether the
+	// result is final or not; and a void* pointer to the SodaRecognizerImpl
+	// instance associated with the stream.
+	RecognitionResultHandler callback;
 
-  // A void pointer to the SodaRecognizerImpl instance associated with the
-  // stream.
-  void* callback_handle;
+	// A void pointer to the SodaRecognizerImpl instance associated with the
+	// stream.
+	void* callback_handle;
 
-  const char* api_key;
+	const char* api_key;
 } SodaConfig;
 
 // Creates and instantiates an instance of SODA.
@@ -38,7 +38,7 @@ extern void DeleteSodaAsync(void* soda_async_handle);
 
 // Feeds raw audio to SODA in the form of a contiguous stream of characters.
 extern void AddAudio(void* soda_async_handle, const char* audio_buffer, int audio_buffer_size);
-}
+
 
 #ifdef __cplusplus
 }
@@ -46,7 +46,14 @@ extern void AddAudio(void* soda_async_handle, const char* audio_buffer, int audi
 
 using namespace std;
 
-int main(int argc, char *argv[]) {
-	return 0;
+void resultHandler(const char* text, const bool isFinal, void* instance) {
+	cout << (isFinal ? "final: " : "") << text << endl;
 }
 
+int main(int argc, char *argv[]) {
+	SodaConfig config = {1, 22050, "./SODAFiles/", resultHandler, nullptr, "api_key_dummy"};
+	void* handle = CreateSodaAsync(config);
+	DeleteSodaAsync(handle);
+
+	return 0;
+}
