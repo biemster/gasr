@@ -1,8 +1,12 @@
 #include <iostream>
-#include <fstream>
 #include <vector>
 #include <string.h>
 #include <unistd.h>
+#include <fcntl.h>
+
+#define CHANNEL_COUNT 1
+#define SAMPLE_RATE 16000
+#define BUFSIZE 1024
 
 #ifdef __cplusplus
 extern "C" {
@@ -52,19 +56,19 @@ void resultHandler(const char* text, const bool isFinal, void* instance) {
 }
 
 int main(int argc, char *argv[]) {
-	SodaConfig config = {1, 16000, "./SODAModels/", resultHandler, nullptr, "api_key_dummy"};
+	SodaConfig config = {CHANNEL_COUNT, SAMPLE_RATE, "./SODAModels/", resultHandler, nullptr, "api_key_dummy"};
 	void* handle = CreateSodaAsync(config);
 
-	ifstream stream("whatstheweatherlike.wav", ios::in | ios::binary);
-	vector<char> audio((istreambuf_iterator<char>(stream)), istreambuf_iterator<char>());
-	int data_start = 42;
-	int data_len = *(int*)&audio[data_start -2];
-	if(string(&audio[data_start -6], 4) == "data" && data_len < audio.size()) {
-		AddAudio(handle, &audio[data_start], data_len);
-		sleep(3); // give everything some time to do their thing
-	}
-	else {
-		cout << "Error reading wav file" << endl;
+	char audio[BUFSIZE] = {};
+	size_t len = 0;
+#ifdef __MINGW32__
+	setmode(fileno(stdin), O_BINARY);
+#else
+	freopen(nullptr, "rb", stdin);
+#endif
+	while((len = fread(audio, sizeof(audio[0]), BUFSIZE, stdin)) > 0) {
+		AddAudio(handle, audio, len);
+		cout << "* Added " << len << " bytes of audio to pipeline" << endl;
 	}
 
 	DeleteSodaAsync(handle);
