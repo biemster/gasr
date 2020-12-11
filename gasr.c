@@ -6,7 +6,8 @@
 
 #define CHANNEL_COUNT 1
 #define SAMPLE_RATE 16000
-#define BUFSIZE 1024
+#define CHUNK_SIZE 2048 // 2 chunks per frame, a frame is a single s16
+
 
 #ifdef __cplusplus
 extern "C" {
@@ -48,28 +49,30 @@ extern void AddAudio(void* soda_async_handle, const char* audio_buffer, int audi
 }
 #endif
 
-
-using namespace std;
-
 void resultHandler(const char* text, const bool isFinal, void* instance) {
-	cout << (isFinal ? "final: " : "") << text << endl;
+	std::cout << (isFinal ? ">>> final: " : ">>> ") << text << std::endl;
 }
+
 
 int main(int argc, char *argv[]) {
 	SodaConfig config = {CHANNEL_COUNT, SAMPLE_RATE, "./SODAModels/", resultHandler, nullptr, "api_key_dummy"};
 	void* handle = CreateSodaAsync(config);
 
-	char audio[BUFSIZE] = {};
-	size_t len = 0;
 #ifdef __MINGW32__
 	setmode(fileno(stdin), O_BINARY);
 #else
 	freopen(nullptr, "rb", stdin);
 #endif
-	while((len = fread(audio, sizeof(audio[0]), BUFSIZE, stdin)) > 0) {
+
+	char audio[CHUNK_SIZE] = {};
+	size_t len = 0;
+	size_t out_size = 0;
+	while((len = fread(audio, sizeof(audio[0]), CHUNK_SIZE, stdin)) > 0) {
 		AddAudio(handle, audio, len);
-		cout << "* Added " << len << " bytes of audio to pipeline" << endl;
+		usleep(20000); // Sleep for 20ms to simulate real-time audio. SODA requires audio streaming in order to return events.
+		out_size += len;
 	}
+	std::cout << "* added " << out_size << " bytes of audio" << std::endl;
 
 	DeleteSodaAsync(handle);
 
