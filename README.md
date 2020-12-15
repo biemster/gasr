@@ -4,6 +4,8 @@ Google Chrome SODA Offline Speech Recognition command line client
 ##### Intro:
 This is a proof of concept how to write code against the libsoda library found in the Chrome browser, which uses it for Live Transcribe.
 It's not a full application, but it will write out a live transcription to stdout of audio fed through stdin using for example ALSA or SoX.
+SoX for real-time audio is actually not real-time enough, and results in a lot of warning messages about a lagging pipeline. Good
+results are obtained with `ecasound`.
 
 ##### Prepare:
 Get a copy of libsoda from Chrome for your platform. At the time of this writing only Windows and OSX libraries are available,
@@ -23,7 +25,7 @@ make mingw
 Run the pipeline from the `gtts` repo directory so it can find `libchrometts`, and symlink the `SODAModels` directory
 thats in the `gasr` repo to the `gtts` repo dir.
 ```
-./gtts "Full Text to Speech to Text pipeline!" | sox -tf32 -L -r22050 -c1 - -ts16 - | wine ../gasr/gasr
+./gtts "Full Text to Speech to Text pipeline!" | sox -tf32 -L -r22050 -c1 - -ts16 - | wine ../gasr/gasr --stream-delay
 ```
 It should produce an output similar to this:
 ```
@@ -167,7 +169,7 @@ E1215 18:38:30.571428      44 mapped-file.cc:44] Failed to unmap region: 2
 W1215 18:38:30.571547      44 soda_async_impl.cc:793] Deleting soda_impl
 ```
 
-##### Run:
+##### Run (through wine for now):
 ```
-arecord | ./gasr
+ecasound -f:16,1,16000 -i alsa -o:stdout|wine gasr.exe
 ```
