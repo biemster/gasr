@@ -8,7 +8,7 @@ It's not a full application, but it will write out a live transcription to stdou
 ##### Prepare:
 Get a copy of libsoda from Chrome for your platform. At the time of this writing only Windows and OSX libraries are available,
 I'm still waiting for the Linux version to be available. The windows library is actually usable for the time being,
-by cross compiling using mingw (make target included), and running the client through wine.
+by cross compiling using mingw (make target included), and running the client through `wine`.
 
 ##### Compile:
 ```
