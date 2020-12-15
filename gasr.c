@@ -55,6 +55,11 @@ void resultHandler(const char* text, const bool isFinal, void* instance) {
 
 
 int main(int argc, char *argv[]) {
+	bool add_stream_delay = false;
+	if(argc == 2 && !strncmp(argv[1], "--stream-delay", strlen("--stream-delay"))) {
+		add_stream_delay = true;
+	}
+
 	SodaConfig config = {CHANNEL_COUNT, SAMPLE_RATE, "./SODAModels/", resultHandler, nullptr, "api_key_dummy"};
 	void* handle = CreateSodaAsync(config);
 
@@ -66,13 +71,13 @@ int main(int argc, char *argv[]) {
 
 	char audio[CHUNK_SIZE] = {};
 	size_t len = 0;
-	size_t out_size = 0;
 	while((len = fread(audio, sizeof(audio[0]), CHUNK_SIZE, stdin)) > 0) {
 		AddAudio(handle, audio, len);
-		usleep(20000); // Sleep for 20ms to simulate real-time audio. SODA requires audio streaming in order to return events.
-		out_size += len;
+		if(add_stream_delay) {
+			// Sleep for 20ms to simulate real-time audio. SODA requires audio streaming in order to return events.
+			usleep(20000);
+		}
 	}
-	std::cout << "* added " << out_size << " bytes of audio" << std::endl;
 
 	DeleteSodaAsync(handle);
 
