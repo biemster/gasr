@@ -25,7 +25,7 @@ make mingw
 Run the pipeline from the `gtts` repo directory so it can find `libchrometts`, and symlink the `SODAModels` directory
 thats in the `gasr` repo to the `gtts` repo dir.
 ```
-./gtts "Full Text to Speech to Text pipeline!" | sox -tf32 -L -r22050 -c1 - -ts16 - | wine ../gasr/gasr --stream-delay
+./gtts "Full Text to Speech to Text pipeline!" | sox -tf32 -L -r22050 -c1 - -ts16 - | wine ../gasr/gasr.exe --stream-delay
 ```
 It should produce an output similar to this:
 ```
@@ -167,6 +167,36 @@ E1215 18:38:30.569348      44 mapped-file.cc:44] Failed to unmap region: 2
 E1215 18:38:30.569424      44 mapped-file.cc:44] Failed to unmap region: 2
 E1215 18:38:30.571428      44 mapped-file.cc:44] Failed to unmap region: 2
 W1215 18:38:30.571547      44 soda_async_impl.cc:793] Deleting soda_impl
+```
+There is also a French model available:
+```
+./gtts ./fr-fr1/ "Texte intégral de la parole au pipeline de texte!" | sox -tf32 -L -r22050 -c1 - -ts16 - | wine ../gasr/gasr.exe --stream-delay
+```
+although that seems to be still a bit rough around the edges:
+```
+W1216 11:50:02.203720      43 soda_async_impl.cc:390] Soda session starting (require_hotword:0, hotword_timeout_in_millis:0)
+I1216 11:50:02.648613    6891 chrome_tts.cc:134] Shutting down
+>>> texte
+>>> texte
+>>> texte int
+>>> texte int
+>>> texte int├⌐g
+>>> texte int├⌐g
+>>> texte int├⌐gra
+>>> texte int├⌐gra
+>>> texte int├⌐gral
+>>> texte int├⌐gral
+>>> texte int├⌐gral
+>>> texte int├⌐gral de
+>>> texte int├⌐gral de
+>>> texte int├⌐gral de
+>>> texte int├⌐gral de
+>>> texte int├⌐gral de la
+>>> texte int├⌐gral de la
+>>> texte int├⌐gral de la paro
+>>> texte int├⌐gral de la parole
+>>> texte int├⌐gral de la parole
+W1216 11:50:03.837144      44 soda_async_impl.cc:765] Soda session stopped due to: STOP_CALLED
 ```
 
 ##### Run (through wine for now):
