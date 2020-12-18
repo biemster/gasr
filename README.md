@@ -370,5 +370,6 @@ W1218 18:50:36.725131   32078 soda_async_impl.cc:793] Deleting soda_impl
 
 ##### Run:
 ```
-ecasound -f:16,1,16000 -i alsa -o:stdout | ./gasr
+ecasound -f:16,1,16000 -i alsa -o:stdout | ./gasr 2>/dev/null
 ```
+Remove `2>/dev/null` to see the debug output

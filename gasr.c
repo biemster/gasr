@@ -50,7 +50,11 @@ extern void AddAudio(void* soda_async_handle, const char* audio_buffer, int audi
 #endif
 
 void resultHandler(const char* text, const bool isFinal, void* instance) {
-	std::cout << (isFinal ? ">>> final: " : ">>> ") << text << std::endl;
+	std::cout << "* " << text << (isFinal ? '\n' : '\r') << std::flush;
+	
+	if(!strncmp(text,"stop",4) && isFinal) {
+		exit(0);
+	}
 }
 
 
