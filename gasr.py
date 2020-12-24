@@ -14,25 +14,36 @@ class SodaConfig(ctypes.Structure):
                 ('callback_handle', ctypes.c_void_p),
                 ('api_key', ctypes.c_char_p)]
 
-sodalib = ctypes.CDLL('./libsoda.so')
+CALLBACK = ctypes.CFUNCTYPE(None, ctypes.c_char_p, ctypes.c_bool, ctypes.c_void_p)
 
-@ctypes.CFUNCTYPE(None, ctypes.c_char_p, ctypes.c_bool, ctypes.c_void_p)
-def resultHandler(text, isFinal, instance):
-    if isFinal:
-        print(f'* {text.decode()}')
-    else:
-        print(f'* {text.decode()}', end='\r')
+class SodaClient():
+    def __init__(self, callback=None):
+        self.sodalib = ctypes.CDLL('./libsoda.so')
+        if callback == None:
+            callback = CALLBACK(self.resultHandler)
+        else:
+            callback = CALLBACK(callback)
+        self.config = SodaConfig(CHANNEL_COUNT, SAMPLE_RATE, b'./SODAModels/', callback, None, b'api_key_dummy')
+
+    def start(self):
+        self.handle = self.sodalib.CreateSodaAsync(self.config)
+        while True:
+            audio = sys.stdin.buffer.read(CHUNK_SIZE)
+            self.sodalib.AddAudio(self.handle, audio, len(audio))
+
+    def delete(self):
+        self.sodalib.DeleteSodaAsync(self.handle)
+
+    def resultHandler(self, text, isFinal, instance):
+        if isFinal:
+            print(f'* {text.decode()}')
+        else:
+            print(f'* {text.decode()}', end='\r')
 
 
 if __name__ == '__main__':
-    config = SodaConfig(CHANNEL_COUNT, SAMPLE_RATE, b'./SODAModels/', resultHandler, None, b'api_key_dummy')
-    handle = sodalib.CreateSodaAsync(config)
-
+    client = SodaClient()
     try:
-        while True:
-            audio = sys.stdin.buffer.read(CHUNK_SIZE)
-            sodalib.AddAudio(handle, audio, len(audio))
+        client.start()
     except KeyboardInterrupt:
-        print('Closing up')
-
-    sodalib.DeleteSodaAsync(handle)
+        client.delete()
