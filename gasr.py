@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
 import sys
 import ctypes
-import time
 
 CHANNEL_COUNT = 1
 SAMPLE_RATE = 16000
@@ -16,22 +15,24 @@ class SodaConfig(ctypes.Structure):
                 ('api_key', ctypes.c_char_p)]
 
 sodalib = ctypes.CDLL('./libsoda.so')
-is_stop_called = False
 
 @ctypes.CFUNCTYPE(None, ctypes.c_char_p, ctypes.c_bool, ctypes.c_void_p)
 def resultHandler(text, isFinal, instance):
-    print(isFinal, text)
-
-    if isFinal and text == 'stop':
-        is_stop_called = True
+    if isFinal:
+        print(f'* {text.decode()}')
+    else:
+        print(f'* {text.decode()}', end='\r')
 
 
 if __name__ == '__main__':
     config = SodaConfig(CHANNEL_COUNT, SAMPLE_RATE, b'./SODAModels/', resultHandler, None, b'api_key_dummy')
     handle = sodalib.CreateSodaAsync(config)
 
-    while not is_stop_called:
-        audio = sys.stdin.buffer.read(CHUNK_SIZE)
-        sodalib.AddAudio(handle, audio, CHUNK_SIZE //2)
+    try:
+        while True:
+            audio = sys.stdin.buffer.read(CHUNK_SIZE)
+            sodalib.AddAudio(handle, audio, len(audio))
+    except KeyboardInterrupt:
+        print('Closing up')
 
     sodalib.DeleteSodaAsync(handle)
