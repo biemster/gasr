@@ -375,7 +375,7 @@ ecasound -f:16,1,16000 -i alsa -o:stdout | ./gasr 2>/dev/null
 Remove `2>/dev/null` to see the debug output.
 
 There is also a Python wrapper now (gasr.py, put that, and libsoda.so in the working directory):
-'''
+```
 #!/usr/bin/env python3
 from gasr import SodaClient
 
@@ -383,4 +383,4 @@ def callback(text, isFinal, handle): print(isFinal, f'got {text}')
 
 client = SodaClient(callback)
 client.start()
-'''
+```
