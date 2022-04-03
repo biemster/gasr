@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 import sys
 import ctypes
-from soda_api_pb2 import SerializedSodaConfigMsg, SodaResponse, SodaRecognitionResult
+from soda_api_pb2 import ExtendedSodaConfigMsg, SodaResponse, SodaRecognitionResult
 
 CHANNEL_COUNT = 1
 SAMPLE_RATE = 16000
@@ -22,7 +22,7 @@ class SodaClient():
             callback = CALLBACK(self.resultHandler)
         else:
             callback = CALLBACK(callback)
-        cfg_proto = SerializedSodaConfigMsg()
+        cfg_proto = ExtendedSodaConfigMsg()
         cfg_proto.channel_count = CHANNEL_COUNT
         cfg_proto.sample_rate = SAMPLE_RATE
         cfg_proto.api_key = 'dummy_api_key'

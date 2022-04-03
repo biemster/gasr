@@ -17,17 +17,17 @@ _sym_db = _symbol_database.Default()
 
 DESCRIPTOR = _descriptor.FileDescriptor(
   name='soda_api.proto',
-  package='speech.soda.api',
+  package='speech.soda.chrome',
   syntax='proto2',
-  serialized_pb=_b('\n\x0esoda_api.proto\x12\x0fspeech.soda.api\"\xda\x03\n\x17SerializedSodaConfigMsg\x12\x15\n\rchannel_count\x18\x01 \x01(\x05\x12\x13\n\x0bsample_rate\x18\x02 \x01(\x05\x12\x1b\n\x10max_buffer_bytes\x18\x04 \x01(\x05:\x01\x30\x12)\n\x1asimulate_realtime_testonly\x18\x05 \x01(\x08:\x05\x66\x61lse\x12 \n\x14\x63onfig_file_location\x18\x03 \x01(\tB\x02\x18\x01\x12\x0f\n\x07\x61pi_key\x18\x06 \x01(\t\x12\x1f\n\x17language_pack_directory\x18\x07 \x01(\t\x12W\n\x10recognition_mode\x18\x08 \x01(\x0e\x32\x38.speech.soda.api.SerializedSodaConfigMsg.RecognitionMode:\x03IME\x12#\n\x15reset_on_final_result\x18\t \x01(\x08:\x04true\x12$\n\x16include_timing_metrics\x18\n \x01(\x08:\x04true\x12\x1d\n\x0e\x65nable_lang_id\x18\x0b \x01(\x08:\x05\x66\x61lse\"4\n\x0fRecognitionMode\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x07\n\x03IME\x10\x01\x12\x0b\n\x07\x43\x41PTION\x10\x02\"\x8b\x01\n\rTimingMetrics\x12\x1e\n\x16\x61udio_start_epoch_usec\x18\x01 \x01(\x03\x12\x1d\n\x15\x61udio_start_time_usec\x18\x02 \x01(\x03\x12\x1e\n\x16\x65lapsed_wall_time_usec\x18\x03 \x01(\x03\x12\x1b\n\x13\x65vent_end_time_usec\x18\x04 \x01(\x03\"\xad\x04\n\x15SodaRecognitionResult\x12\x12\n\nhypothesis\x18\x01 \x03(\t\x12\x46\n\x0bresult_type\x18\x02 \x01(\x0e\x32\x31.speech.soda.api.SodaRecognitionResult.ResultType\x12Y\n\x0f\x65ndpoint_reason\x18\x03 \x01(\x0e\x32@.speech.soda.api.SodaRecognitionResult.FinalResultEndpointReason\x12\x36\n\x0etiming_metrics\x18\x04 \x01(\x0b\x32\x1e.speech.soda.api.TimingMetrics\"?\n\nResultType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0b\n\x07PARTIAL\x10\x01\x12\t\n\x05\x46INAL\x10\x02\x12\x0c\n\x08PREFETCH\x10\x03\"\xe3\x01\n\x19\x46inalResultEndpointReason\x12\x14\n\x10\x45NDPOINT_UNKNOWN\x10\x00\x12\x1a\n\x16\x45NDPOINT_END_OF_SPEECH\x10\x01\x12\x1d\n\x19\x45NDPOINT_END_OF_UTTERANCE\x10\x02\x12\x19\n\x15\x45NDPOINT_END_OF_AUDIO\x10\x03\x12!\n\x1d\x45NDPOINT_ASR_RESET_BY_HOTWORD\x10\x04\x12\x1f\n\x1b\x45NDPOINT_ASR_RESET_EXTERNAL\x10\x05\x12\x16\n\x12\x45NDPOINT_ASR_ERROR\x10\x06\"\x89\x02\n\x11SodaEndpointEvent\x12O\n\rendpoint_type\x18\x01 \x01(\x0e\x32/.speech.soda.api.SodaEndpointEvent.EndpointType:\x07UNKNOWN\x12\x36\n\x0etiming_metrics\x18\x02 \x01(\x0b\x32\x1e.speech.soda.api.TimingMetrics\"k\n\x0c\x45ndpointType\x12\x13\n\x0fSTART_OF_SPEECH\x10\x00\x12\x11\n\rEND_OF_SPEECH\x10\x01\x12\x10\n\x0c\x45ND_OF_AUDIO\x10\x02\x12\x14\n\x10\x45ND_OF_UTTERANCE\x10\x03\x12\x0b\n\x07UNKNOWN\x10\x04\"O\n\x12SodaAudioLevelInfo\x12\x0b\n\x03rms\x18\x01 \x01(\x02\x12\x13\n\x0b\x61udio_level\x18\x02 \x01(\x02\x12\x17\n\x0f\x61udio_time_usec\x18\x03 \x01(\x03\"=\n\x0fSodaLangIdEvent\x12\x10\n\x08language\x18\x01 \x01(\t\x12\x18\n\x10\x63onfidence_level\x18\x02 \x01(\x05\"\xcf\x03\n\x0cSodaResponse\x12I\n\tsoda_type\x18\x01 \x01(\x0e\x32-.speech.soda.api.SodaResponse.SodaMessageType:\x07UNKNOWN\x12\x42\n\x12recognition_result\x18\x02 \x01(\x0b\x32&.speech.soda.api.SodaRecognitionResult\x12:\n\x0e\x65ndpoint_event\x18\x03 \x01(\x0b\x32\".speech.soda.api.SodaEndpointEvent\x12=\n\x10\x61udio_level_info\x18\x04 \x01(\x0b\x32#.speech.soda.api.SodaAudioLevelInfo\x12\x36\n\x0clangid_event\x18\x05 \x01(\x0b\x32 .speech.soda.api.SodaLangIdEvent\"}\n\x0fSodaMessageType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0f\n\x0bRECOGNITION\x10\x01\x12\x08\n\x04STOP\x10\x02\x12\x0c\n\x08SHUTDOWN\x10\x03\x12\t\n\x05START\x10\x04\x12\x0c\n\x08\x45NDPOINT\x10\x05\x12\x0f\n\x0b\x41UDIO_LEVEL\x10\x06\x12\n\n\x06LANGID\x10\x07\x42\x04H\x03P\x01')
+  serialized_pb=_b('\n\x0esoda_api.proto\x12\x12speech.soda.chrome\"\xce\x04\n\x15\x45xtendedSodaConfigMsg\x12\x15\n\rchannel_count\x18\x01 \x01(\x05\x12\x13\n\x0bsample_rate\x18\x02 \x01(\x05\x12\x1b\n\x10max_buffer_bytes\x18\x04 \x01(\x05:\x01\x30\x12)\n\x1asimulate_realtime_testonly\x18\x05 \x01(\x08:\x05\x66\x61lse\x12 \n\x14\x63onfig_file_location\x18\x03 \x01(\tB\x02\x18\x01\x12\x0f\n\x07\x61pi_key\x18\x06 \x01(\t\x12\x1f\n\x17language_pack_directory\x18\x07 \x01(\t\x12X\n\x10recognition_mode\x18\x08 \x01(\x0e\x32\x39.speech.soda.chrome.ExtendedSodaConfigMsg.RecognitionMode:\x03IME\x12\'\n\x15reset_on_final_result\x18\t \x01(\x08:\x04trueB\x02\x18\x01\x12$\n\x16include_timing_metrics\x18\n \x01(\x08:\x04true\x12\x1d\n\x0e\x65nable_lang_id\x18\x0b \x01(\x08:\x05\x66\x61lse\x12\x1f\n\x11\x65nable_formatting\x18\x0c \x01(\x08:\x04true\x12.\n\x1f\x65nable_speaker_change_detection\x18\r \x01(\x08:\x05\x66\x61lse\x12\x1e\n\x0finclude_logging\x18\x0e \x01(\x08:\x05\x66\x61lse\"4\n\x0fRecognitionMode\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x07\n\x03IME\x10\x01\x12\x0b\n\x07\x43\x41PTION\x10\x02\"\x8b\x01\n\rTimingMetrics\x12\x1e\n\x16\x61udio_start_epoch_usec\x18\x01 \x01(\x03\x12\x1d\n\x15\x61udio_start_time_usec\x18\x02 \x01(\x03\x12\x1e\n\x16\x65lapsed_wall_time_usec\x18\x03 \x01(\x03\x12\x1b\n\x13\x65vent_end_time_usec\x18\x04 \x01(\x03\"4\n\x0eHypothesisPart\x12\x0c\n\x04text\x18\x01 \x03(\t\x12\x14\n\x0c\x61lignment_ms\x18\x02 \x01(\x03\"\xf3\x04\n\x15SodaRecognitionResult\x12\x12\n\nhypothesis\x18\x01 \x03(\t\x12I\n\x0bresult_type\x18\x02 \x01(\x0e\x32\x34.speech.soda.chrome.SodaRecognitionResult.ResultType\x12\\\n\x0f\x65ndpoint_reason\x18\x03 \x01(\x0e\x32\x43.speech.soda.chrome.SodaRecognitionResult.FinalResultEndpointReason\x12\x39\n\x0etiming_metrics\x18\x04 \x01(\x0b\x32!.speech.soda.chrome.TimingMetrics\x12;\n\x0fhypothesis_part\x18\x05 \x03(\x0b\x32\".speech.soda.chrome.HypothesisPart\"?\n\nResultType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0b\n\x07PARTIAL\x10\x01\x12\t\n\x05\x46INAL\x10\x02\x12\x0c\n\x08PREFETCH\x10\x03\"\xe3\x01\n\x19\x46inalResultEndpointReason\x12\x14\n\x10\x45NDPOINT_UNKNOWN\x10\x00\x12\x1a\n\x16\x45NDPOINT_END_OF_SPEECH\x10\x01\x12\x1d\n\x19\x45NDPOINT_END_OF_UTTERANCE\x10\x02\x12\x19\n\x15\x45NDPOINT_END_OF_AUDIO\x10\x03\x12!\n\x1d\x45NDPOINT_ASR_RESET_BY_HOTWORD\x10\x04\x12\x1f\n\x1b\x45NDPOINT_ASR_RESET_EXTERNAL\x10\x05\x12\x16\n\x12\x45NDPOINT_ASR_ERROR\x10\x06\"\x8f\x02\n\x11SodaEndpointEvent\x12R\n\rendpoint_type\x18\x01 \x01(\x0e\x32\x32.speech.soda.chrome.SodaEndpointEvent.EndpointType:\x07UNKNOWN\x12\x39\n\x0etiming_metrics\x18\x02 \x01(\x0b\x32!.speech.soda.chrome.TimingMetrics\"k\n\x0c\x45ndpointType\x12\x13\n\x0fSTART_OF_SPEECH\x10\x00\x12\x11\n\rEND_OF_SPEECH\x10\x01\x12\x10\n\x0c\x45ND_OF_AUDIO\x10\x02\x12\x14\n\x10\x45ND_OF_UTTERANCE\x10\x03\x12\x0b\n\x07UNKNOWN\x10\x04\"O\n\x12SodaAudioLevelInfo\x12\x0b\n\x03rms\x18\x01 \x01(\x02\x12\x13\n\x0b\x61udio_level\x18\x02 \x01(\x02\x12\x17\n\x0f\x61udio_time_usec\x18\x03 \x01(\x03\"=\n\x0fSodaLangIdEvent\x12\x10\n\x08language\x18\x01 \x01(\t\x12\x18\n\x10\x63onfidence_level\x18\x02 \x01(\x05\"\x94\x04\n\x0cSodaResponse\x12L\n\tsoda_type\x18\x01 \x01(\x0e\x32\x30.speech.soda.chrome.SodaResponse.SodaMessageType:\x07UNKNOWN\x12\x45\n\x12recognition_result\x18\x02 \x01(\x0b\x32).speech.soda.chrome.SodaRecognitionResult\x12=\n\x0e\x65ndpoint_event\x18\x03 \x01(\x0b\x32%.speech.soda.chrome.SodaEndpointEvent\x12@\n\x10\x61udio_level_info\x18\x04 \x01(\x0b\x32&.speech.soda.chrome.SodaAudioLevelInfo\x12\x39\n\x0clangid_event\x18\x05 \x01(\x0b\x32#.speech.soda.chrome.SodaLangIdEvent\x12\x11\n\tlog_lines\x18\x06 \x03(\t\"\x9f\x01\n\x0fSodaMessageType\x12\x0b\n\x07UNKNOWN\x10\x00\x12\x0f\n\x0bRECOGNITION\x10\x01\x12\x08\n\x04STOP\x10\x02\x12\x0c\n\x08SHUTDOWN\x10\x03\x12\t\n\x05START\x10\x04\x12\x0c\n\x08\x45NDPOINT\x10\x05\x12\x0f\n\x0b\x41UDIO_LEVEL\x10\x06\x12\n\n\x06LANGID\x10\x07\x12 \n\x1cLOGS_ONLY_ARTIFICIAL_MESSAGE\x10\x08\x42\x04H\x03P\x01')
 )
 _sym_db.RegisterFileDescriptor(DESCRIPTOR)
 
 
 
-_SERIALIZEDSODACONFIGMSG_RECOGNITIONMODE = _descriptor.EnumDescriptor(
+_EXTENDEDSODACONFIGMSG_RECOGNITIONMODE = _descriptor.EnumDescriptor(
   name='RecognitionMode',
-  full_name='speech.soda.api.SerializedSodaConfigMsg.RecognitionMode',
+  full_name='speech.soda.chrome.ExtendedSodaConfigMsg.RecognitionMode',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -46,14 +46,14 @@ _SERIALIZEDSODACONFIGMSG_RECOGNITIONMODE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=458,
-  serialized_end=510,
+  serialized_start=577,
+  serialized_end=629,
 )
-_sym_db.RegisterEnumDescriptor(_SERIALIZEDSODACONFIGMSG_RECOGNITIONMODE)
+_sym_db.RegisterEnumDescriptor(_EXTENDEDSODACONFIGMSG_RECOGNITIONMODE)
 
 _SODARECOGNITIONRESULT_RESULTTYPE = _descriptor.EnumDescriptor(
   name='ResultType',
-  full_name='speech.soda.api.SodaRecognitionResult.ResultType',
+  full_name='speech.soda.chrome.SodaRecognitionResult.ResultType',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -76,14 +76,14 @@ _SODARECOGNITIONRESULT_RESULTTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=919,
-  serialized_end=982,
+  serialized_start=1162,
+  serialized_end=1225,
 )
 _sym_db.RegisterEnumDescriptor(_SODARECOGNITIONRESULT_RESULTTYPE)
 
 _SODARECOGNITIONRESULT_FINALRESULTENDPOINTREASON = _descriptor.EnumDescriptor(
   name='FinalResultEndpointReason',
-  full_name='speech.soda.api.SodaRecognitionResult.FinalResultEndpointReason',
+  full_name='speech.soda.chrome.SodaRecognitionResult.FinalResultEndpointReason',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -118,14 +118,14 @@ _SODARECOGNITIONRESULT_FINALRESULTENDPOINTREASON = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=985,
-  serialized_end=1212,
+  serialized_start=1228,
+  serialized_end=1455,
 )
 _sym_db.RegisterEnumDescriptor(_SODARECOGNITIONRESULT_FINALRESULTENDPOINTREASON)
 
 _SODAENDPOINTEVENT_ENDPOINTTYPE = _descriptor.EnumDescriptor(
   name='EndpointType',
-  full_name='speech.soda.api.SodaEndpointEvent.EndpointType',
+  full_name='speech.soda.chrome.SodaEndpointEvent.EndpointType',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -152,14 +152,14 @@ _SODAENDPOINTEVENT_ENDPOINTTYPE = _descriptor.EnumDescriptor(
   ],
   containing_type=None,
   options=None,
-  serialized_start=1373,
-  serialized_end=1480,
+  serialized_start=1622,
+  serialized_end=1729,
 )
 _sym_db.RegisterEnumDescriptor(_SODAENDPOINTEVENT_ENDPOINTTYPE)
 
 _SODARESPONSE_SODAMESSAGETYPE = _descriptor.EnumDescriptor(
   name='SodaMessageType',
-  full_name='speech.soda.api.SodaResponse.SodaMessageType',
+  full_name='speech.soda.chrome.SodaResponse.SodaMessageType',
   filename=None,
   file=DESCRIPTOR,
   values=[
@@ -195,95 +195,120 @@ _SODARESPONSE_SODAMESSAGETYPE = _descriptor.EnumDescriptor(
       name='LANGID', index=7, number=7,
       options=None,
       type=None),
+    _descriptor.EnumValueDescriptor(
+      name='LOGS_ONLY_ARTIFICIAL_MESSAGE', index=8, number=8,
+      options=None,
+      type=None),
   ],
   containing_type=None,
   options=None,
-  serialized_start=1965,
-  serialized_end=2090,
+  serialized_start=2249,
+  serialized_end=2408,
 )
 _sym_db.RegisterEnumDescriptor(_SODARESPONSE_SODAMESSAGETYPE)
 
 
-_SERIALIZEDSODACONFIGMSG = _descriptor.Descriptor(
-  name='SerializedSodaConfigMsg',
-  full_name='speech.soda.api.SerializedSodaConfigMsg',
+_EXTENDEDSODACONFIGMSG = _descriptor.Descriptor(
+  name='ExtendedSodaConfigMsg',
+  full_name='speech.soda.chrome.ExtendedSodaConfigMsg',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='channel_count', full_name='speech.soda.api.SerializedSodaConfigMsg.channel_count', index=0,
+      name='channel_count', full_name='speech.soda.chrome.ExtendedSodaConfigMsg.channel_count', index=0,
       number=1, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='sample_rate', full_name='speech.soda.api.SerializedSodaConfigMsg.sample_rate', index=1,
+      name='sample_rate', full_name='speech.soda.chrome.ExtendedSodaConfigMsg.sample_rate', index=1,
       number=2, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='max_buffer_bytes', full_name='speech.soda.api.SerializedSodaConfigMsg.max_buffer_bytes', index=2,
+      name='max_buffer_bytes', full_name='speech.soda.chrome.ExtendedSodaConfigMsg.max_buffer_bytes', index=2,
       number=4, type=5, cpp_type=1, label=1,
       has_default_value=True, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='simulate_realtime_testonly', full_name='speech.soda.api.SerializedSodaConfigMsg.simulate_realtime_testonly', index=3,
+      name='simulate_realtime_testonly', full_name='speech.soda.chrome.ExtendedSodaConfigMsg.simulate_realtime_testonly', index=3,
       number=5, type=8, cpp_type=7, label=1,
       has_default_value=True, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='config_file_location', full_name='speech.soda.api.SerializedSodaConfigMsg.config_file_location', index=4,
+      name='config_file_location', full_name='speech.soda.chrome.ExtendedSodaConfigMsg.config_file_location', index=4,
       number=3, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\030\001'))),
     _descriptor.FieldDescriptor(
-      name='api_key', full_name='speech.soda.api.SerializedSodaConfigMsg.api_key', index=5,
+      name='api_key', full_name='speech.soda.chrome.ExtendedSodaConfigMsg.api_key', index=5,
       number=6, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='language_pack_directory', full_name='speech.soda.api.SerializedSodaConfigMsg.language_pack_directory', index=6,
+      name='language_pack_directory', full_name='speech.soda.chrome.ExtendedSodaConfigMsg.language_pack_directory', index=6,
       number=7, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='recognition_mode', full_name='speech.soda.api.SerializedSodaConfigMsg.recognition_mode', index=7,
+      name='recognition_mode', full_name='speech.soda.chrome.ExtendedSodaConfigMsg.recognition_mode', index=7,
       number=8, type=14, cpp_type=8, label=1,
       has_default_value=True, default_value=1,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='reset_on_final_result', full_name='speech.soda.api.SerializedSodaConfigMsg.reset_on_final_result', index=8,
+      name='reset_on_final_result', full_name='speech.soda.chrome.ExtendedSodaConfigMsg.reset_on_final_result', index=8,
       number=9, type=8, cpp_type=7, label=1,
       has_default_value=True, default_value=True,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
-      options=None),
+      options=_descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\030\001'))),
     _descriptor.FieldDescriptor(
-      name='include_timing_metrics', full_name='speech.soda.api.SerializedSodaConfigMsg.include_timing_metrics', index=9,
+      name='include_timing_metrics', full_name='speech.soda.chrome.ExtendedSodaConfigMsg.include_timing_metrics', index=9,
       number=10, type=8, cpp_type=7, label=1,
       has_default_value=True, default_value=True,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='enable_lang_id', full_name='speech.soda.api.SerializedSodaConfigMsg.enable_lang_id', index=10,
+      name='enable_lang_id', full_name='speech.soda.chrome.ExtendedSodaConfigMsg.enable_lang_id', index=10,
       number=11, type=8, cpp_type=7, label=1,
+      has_default_value=True, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='enable_formatting', full_name='speech.soda.chrome.ExtendedSodaConfigMsg.enable_formatting', index=11,
+      number=12, type=8, cpp_type=7, label=1,
+      has_default_value=True, default_value=True,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='enable_speaker_change_detection', full_name='speech.soda.chrome.ExtendedSodaConfigMsg.enable_speaker_change_detection', index=12,
+      number=13, type=8, cpp_type=7, label=1,
+      has_default_value=True, default_value=False,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='include_logging', full_name='speech.soda.chrome.ExtendedSodaConfigMsg.include_logging', index=13,
+      number=14, type=8, cpp_type=7, label=1,
       has_default_value=True, default_value=False,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
@@ -293,7 +318,7 @@ _SERIALIZEDSODACONFIGMSG = _descriptor.Descriptor(
   ],
   nested_types=[],
   enum_types=[
-    _SERIALIZEDSODACONFIGMSG_RECOGNITIONMODE,
+    _EXTENDEDSODACONFIGMSG_RECOGNITIONMODE,
   ],
   options=None,
   is_extendable=False,
@@ -301,41 +326,41 @@ _SERIALIZEDSODACONFIGMSG = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=36,
-  serialized_end=510,
+  serialized_start=39,
+  serialized_end=629,
 )
 
 
 _TIMINGMETRICS = _descriptor.Descriptor(
   name='TimingMetrics',
-  full_name='speech.soda.api.TimingMetrics',
+  full_name='speech.soda.chrome.TimingMetrics',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='audio_start_epoch_usec', full_name='speech.soda.api.TimingMetrics.audio_start_epoch_usec', index=0,
+      name='audio_start_epoch_usec', full_name='speech.soda.chrome.TimingMetrics.audio_start_epoch_usec', index=0,
       number=1, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='audio_start_time_usec', full_name='speech.soda.api.TimingMetrics.audio_start_time_usec', index=1,
+      name='audio_start_time_usec', full_name='speech.soda.chrome.TimingMetrics.audio_start_time_usec', index=1,
       number=2, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='elapsed_wall_time_usec', full_name='speech.soda.api.TimingMetrics.elapsed_wall_time_usec', index=2,
+      name='elapsed_wall_time_usec', full_name='speech.soda.chrome.TimingMetrics.elapsed_wall_time_usec', index=2,
       number=3, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='event_end_time_usec', full_name='speech.soda.api.TimingMetrics.event_end_time_usec', index=3,
+      name='event_end_time_usec', full_name='speech.soda.chrome.TimingMetrics.event_end_time_usec', index=3,
       number=4, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -353,43 +378,88 @@ _TIMINGMETRICS = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=513,
-  serialized_end=652,
+  serialized_start=632,
+  serialized_end=771,
 )
 
 
-_SODARECOGNITIONRESULT = _descriptor.Descriptor(
-  name='SodaRecognitionResult',
-  full_name='speech.soda.api.SodaRecognitionResult',
+_HYPOTHESISPART = _descriptor.Descriptor(
+  name='HypothesisPart',
+  full_name='speech.soda.chrome.HypothesisPart',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='hypothesis', full_name='speech.soda.api.SodaRecognitionResult.hypothesis', index=0,
+      name='text', full_name='speech.soda.chrome.HypothesisPart.text', index=0,
       number=1, type=9, cpp_type=9, label=3,
       has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='result_type', full_name='speech.soda.api.SodaRecognitionResult.result_type', index=1,
+      name='alignment_ms', full_name='speech.soda.chrome.HypothesisPart.alignment_ms', index=1,
+      number=2, type=3, cpp_type=2, label=1,
+      has_default_value=False, default_value=0,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+  ],
+  extensions=[
+  ],
+  nested_types=[],
+  enum_types=[
+  ],
+  options=None,
+  is_extendable=False,
+  syntax='proto2',
+  extension_ranges=[],
+  oneofs=[
+  ],
+  serialized_start=773,
+  serialized_end=825,
+)
+
+
+_SODARECOGNITIONRESULT = _descriptor.Descriptor(
+  name='SodaRecognitionResult',
+  full_name='speech.soda.chrome.SodaRecognitionResult',
+  filename=None,
+  file=DESCRIPTOR,
+  containing_type=None,
+  fields=[
+    _descriptor.FieldDescriptor(
+      name='hypothesis', full_name='speech.soda.chrome.SodaRecognitionResult.hypothesis', index=0,
+      number=1, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='result_type', full_name='speech.soda.chrome.SodaRecognitionResult.result_type', index=1,
       number=2, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='endpoint_reason', full_name='speech.soda.api.SodaRecognitionResult.endpoint_reason', index=2,
+      name='endpoint_reason', full_name='speech.soda.chrome.SodaRecognitionResult.endpoint_reason', index=2,
       number=3, type=14, cpp_type=8, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='timing_metrics', full_name='speech.soda.api.SodaRecognitionResult.timing_metrics', index=3,
+      name='timing_metrics', full_name='speech.soda.chrome.SodaRecognitionResult.timing_metrics', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='hypothesis_part', full_name='speech.soda.chrome.SodaRecognitionResult.hypothesis_part', index=4,
+      number=5, type=11, cpp_type=10, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -407,27 +477,27 @@ _SODARECOGNITIONRESULT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=655,
-  serialized_end=1212,
+  serialized_start=828,
+  serialized_end=1455,
 )
 
 
 _SODAENDPOINTEVENT = _descriptor.Descriptor(
   name='SodaEndpointEvent',
-  full_name='speech.soda.api.SodaEndpointEvent',
+  full_name='speech.soda.chrome.SodaEndpointEvent',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='endpoint_type', full_name='speech.soda.api.SodaEndpointEvent.endpoint_type', index=0,
+      name='endpoint_type', full_name='speech.soda.chrome.SodaEndpointEvent.endpoint_type', index=0,
       number=1, type=14, cpp_type=8, label=1,
       has_default_value=True, default_value=4,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='timing_metrics', full_name='speech.soda.api.SodaEndpointEvent.timing_metrics', index=1,
+      name='timing_metrics', full_name='speech.soda.chrome.SodaEndpointEvent.timing_metrics', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
@@ -446,34 +516,34 @@ _SODAENDPOINTEVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1215,
-  serialized_end=1480,
+  serialized_start=1458,
+  serialized_end=1729,
 )
 
 
 _SODAAUDIOLEVELINFO = _descriptor.Descriptor(
   name='SodaAudioLevelInfo',
-  full_name='speech.soda.api.SodaAudioLevelInfo',
+  full_name='speech.soda.chrome.SodaAudioLevelInfo',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='rms', full_name='speech.soda.api.SodaAudioLevelInfo.rms', index=0,
+      name='rms', full_name='speech.soda.chrome.SodaAudioLevelInfo.rms', index=0,
       number=1, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='audio_level', full_name='speech.soda.api.SodaAudioLevelInfo.audio_level', index=1,
+      name='audio_level', full_name='speech.soda.chrome.SodaAudioLevelInfo.audio_level', index=1,
       number=2, type=2, cpp_type=6, label=1,
       has_default_value=False, default_value=float(0),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='audio_time_usec', full_name='speech.soda.api.SodaAudioLevelInfo.audio_time_usec', index=2,
+      name='audio_time_usec', full_name='speech.soda.chrome.SodaAudioLevelInfo.audio_time_usec', index=2,
       number=3, type=3, cpp_type=2, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -491,27 +561,27 @@ _SODAAUDIOLEVELINFO = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1482,
-  serialized_end=1561,
+  serialized_start=1731,
+  serialized_end=1810,
 )
 
 
 _SODALANGIDEVENT = _descriptor.Descriptor(
   name='SodaLangIdEvent',
-  full_name='speech.soda.api.SodaLangIdEvent',
+  full_name='speech.soda.chrome.SodaLangIdEvent',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='language', full_name='speech.soda.api.SodaLangIdEvent.language', index=0,
+      name='language', full_name='speech.soda.chrome.SodaLangIdEvent.language', index=0,
       number=1, type=9, cpp_type=9, label=1,
       has_default_value=False, default_value=_b("").decode('utf-8'),
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='confidence_level', full_name='speech.soda.api.SodaLangIdEvent.confidence_level', index=1,
+      name='confidence_level', full_name='speech.soda.chrome.SodaLangIdEvent.confidence_level', index=1,
       number=2, type=5, cpp_type=1, label=1,
       has_default_value=False, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
@@ -529,50 +599,57 @@ _SODALANGIDEVENT = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1563,
-  serialized_end=1624,
+  serialized_start=1812,
+  serialized_end=1873,
 )
 
 
 _SODARESPONSE = _descriptor.Descriptor(
   name='SodaResponse',
-  full_name='speech.soda.api.SodaResponse',
+  full_name='speech.soda.chrome.SodaResponse',
   filename=None,
   file=DESCRIPTOR,
   containing_type=None,
   fields=[
     _descriptor.FieldDescriptor(
-      name='soda_type', full_name='speech.soda.api.SodaResponse.soda_type', index=0,
+      name='soda_type', full_name='speech.soda.chrome.SodaResponse.soda_type', index=0,
       number=1, type=14, cpp_type=8, label=1,
       has_default_value=True, default_value=0,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='recognition_result', full_name='speech.soda.api.SodaResponse.recognition_result', index=1,
+      name='recognition_result', full_name='speech.soda.chrome.SodaResponse.recognition_result', index=1,
       number=2, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='endpoint_event', full_name='speech.soda.api.SodaResponse.endpoint_event', index=2,
+      name='endpoint_event', full_name='speech.soda.chrome.SodaResponse.endpoint_event', index=2,
       number=3, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='audio_level_info', full_name='speech.soda.api.SodaResponse.audio_level_info', index=3,
+      name='audio_level_info', full_name='speech.soda.chrome.SodaResponse.audio_level_info', index=3,
       number=4, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
     _descriptor.FieldDescriptor(
-      name='langid_event', full_name='speech.soda.api.SodaResponse.langid_event', index=4,
+      name='langid_event', full_name='speech.soda.chrome.SodaResponse.langid_event', index=4,
       number=5, type=11, cpp_type=10, label=1,
       has_default_value=False, default_value=None,
+      message_type=None, enum_type=None, containing_type=None,
+      is_extension=False, extension_scope=None,
+      options=None),
+    _descriptor.FieldDescriptor(
+      name='log_lines', full_name='speech.soda.chrome.SodaResponse.log_lines', index=5,
+      number=6, type=9, cpp_type=9, label=3,
+      has_default_value=False, default_value=[],
       message_type=None, enum_type=None, containing_type=None,
       is_extension=False, extension_scope=None,
       options=None),
@@ -589,15 +666,16 @@ _SODARESPONSE = _descriptor.Descriptor(
   extension_ranges=[],
   oneofs=[
   ],
-  serialized_start=1627,
-  serialized_end=2090,
+  serialized_start=1876,
+  serialized_end=2408,
 )
 
-_SERIALIZEDSODACONFIGMSG.fields_by_name['recognition_mode'].enum_type = _SERIALIZEDSODACONFIGMSG_RECOGNITIONMODE
-_SERIALIZEDSODACONFIGMSG_RECOGNITIONMODE.containing_type = _SERIALIZEDSODACONFIGMSG
+_EXTENDEDSODACONFIGMSG.fields_by_name['recognition_mode'].enum_type = _EXTENDEDSODACONFIGMSG_RECOGNITIONMODE
+_EXTENDEDSODACONFIGMSG_RECOGNITIONMODE.containing_type = _EXTENDEDSODACONFIGMSG
 _SODARECOGNITIONRESULT.fields_by_name['result_type'].enum_type = _SODARECOGNITIONRESULT_RESULTTYPE
 _SODARECOGNITIONRESULT.fields_by_name['endpoint_reason'].enum_type = _SODARECOGNITIONRESULT_FINALRESULTENDPOINTREASON
 _SODARECOGNITIONRESULT.fields_by_name['timing_metrics'].message_type = _TIMINGMETRICS
+_SODARECOGNITIONRESULT.fields_by_name['hypothesis_part'].message_type = _HYPOTHESISPART
 _SODARECOGNITIONRESULT_RESULTTYPE.containing_type = _SODARECOGNITIONRESULT
 _SODARECOGNITIONRESULT_FINALRESULTENDPOINTREASON.containing_type = _SODARECOGNITIONRESULT
 _SODAENDPOINTEVENT.fields_by_name['endpoint_type'].enum_type = _SODAENDPOINTEVENT_ENDPOINTTYPE
@@ -609,66 +687,76 @@ _SODARESPONSE.fields_by_name['endpoint_event'].message_type = _SODAENDPOINTEVENT
 _SODARESPONSE.fields_by_name['audio_level_info'].message_type = _SODAAUDIOLEVELINFO
 _SODARESPONSE.fields_by_name['langid_event'].message_type = _SODALANGIDEVENT
 _SODARESPONSE_SODAMESSAGETYPE.containing_type = _SODARESPONSE
-DESCRIPTOR.message_types_by_name['SerializedSodaConfigMsg'] = _SERIALIZEDSODACONFIGMSG
+DESCRIPTOR.message_types_by_name['ExtendedSodaConfigMsg'] = _EXTENDEDSODACONFIGMSG
 DESCRIPTOR.message_types_by_name['TimingMetrics'] = _TIMINGMETRICS
+DESCRIPTOR.message_types_by_name['HypothesisPart'] = _HYPOTHESISPART
 DESCRIPTOR.message_types_by_name['SodaRecognitionResult'] = _SODARECOGNITIONRESULT
 DESCRIPTOR.message_types_by_name['SodaEndpointEvent'] = _SODAENDPOINTEVENT
 DESCRIPTOR.message_types_by_name['SodaAudioLevelInfo'] = _SODAAUDIOLEVELINFO
 DESCRIPTOR.message_types_by_name['SodaLangIdEvent'] = _SODALANGIDEVENT
 DESCRIPTOR.message_types_by_name['SodaResponse'] = _SODARESPONSE
 
-SerializedSodaConfigMsg = _reflection.GeneratedProtocolMessageType('SerializedSodaConfigMsg', (_message.Message,), dict(
-  DESCRIPTOR = _SERIALIZEDSODACONFIGMSG,
+ExtendedSodaConfigMsg = _reflection.GeneratedProtocolMessageType('ExtendedSodaConfigMsg', (_message.Message,), dict(
+  DESCRIPTOR = _EXTENDEDSODACONFIGMSG,
   __module__ = 'soda_api_pb2'
-  # @@protoc_insertion_point(class_scope:speech.soda.api.SerializedSodaConfigMsg)
+  # @@protoc_insertion_point(class_scope:speech.soda.chrome.ExtendedSodaConfigMsg)
   ))
-_sym_db.RegisterMessage(SerializedSodaConfigMsg)
+_sym_db.RegisterMessage(ExtendedSodaConfigMsg)
 
 TimingMetrics = _reflection.GeneratedProtocolMessageType('TimingMetrics', (_message.Message,), dict(
   DESCRIPTOR = _TIMINGMETRICS,
   __module__ = 'soda_api_pb2'
-  # @@protoc_insertion_point(class_scope:speech.soda.api.TimingMetrics)
+  # @@protoc_insertion_point(class_scope:speech.soda.chrome.TimingMetrics)
   ))
 _sym_db.RegisterMessage(TimingMetrics)
+
+HypothesisPart = _reflection.GeneratedProtocolMessageType('HypothesisPart', (_message.Message,), dict(
+  DESCRIPTOR = _HYPOTHESISPART,
+  __module__ = 'soda_api_pb2'
+  # @@protoc_insertion_point(class_scope:speech.soda.chrome.HypothesisPart)
+  ))
+_sym_db.RegisterMessage(HypothesisPart)
 
 SodaRecognitionResult = _reflection.GeneratedProtocolMessageType('SodaRecognitionResult', (_message.Message,), dict(
   DESCRIPTOR = _SODARECOGNITIONRESULT,
   __module__ = 'soda_api_pb2'
-  # @@protoc_insertion_point(class_scope:speech.soda.api.SodaRecognitionResult)
+  # @@protoc_insertion_point(class_scope:speech.soda.chrome.SodaRecognitionResult)
   ))
 _sym_db.RegisterMessage(SodaRecognitionResult)
 
 SodaEndpointEvent = _reflection.GeneratedProtocolMessageType('SodaEndpointEvent', (_message.Message,), dict(
   DESCRIPTOR = _SODAENDPOINTEVENT,
   __module__ = 'soda_api_pb2'
-  # @@protoc_insertion_point(class_scope:speech.soda.api.SodaEndpointEvent)
+  # @@protoc_insertion_point(class_scope:speech.soda.chrome.SodaEndpointEvent)
   ))
 _sym_db.RegisterMessage(SodaEndpointEvent)
 
 SodaAudioLevelInfo = _reflection.GeneratedProtocolMessageType('SodaAudioLevelInfo', (_message.Message,), dict(
   DESCRIPTOR = _SODAAUDIOLEVELINFO,
   __module__ = 'soda_api_pb2'
-  # @@protoc_insertion_point(class_scope:speech.soda.api.SodaAudioLevelInfo)
+  # @@protoc_insertion_point(class_scope:speech.soda.chrome.SodaAudioLevelInfo)
   ))
 _sym_db.RegisterMessage(SodaAudioLevelInfo)
 
 SodaLangIdEvent = _reflection.GeneratedProtocolMessageType('SodaLangIdEvent', (_message.Message,), dict(
   DESCRIPTOR = _SODALANGIDEVENT,
   __module__ = 'soda_api_pb2'
-  # @@protoc_insertion_point(class_scope:speech.soda.api.SodaLangIdEvent)
+  # @@protoc_insertion_point(class_scope:speech.soda.chrome.SodaLangIdEvent)
   ))
 _sym_db.RegisterMessage(SodaLangIdEvent)
 
 SodaResponse = _reflection.GeneratedProtocolMessageType('SodaResponse', (_message.Message,), dict(
   DESCRIPTOR = _SODARESPONSE,
   __module__ = 'soda_api_pb2'
-  # @@protoc_insertion_point(class_scope:speech.soda.api.SodaResponse)
+  # @@protoc_insertion_point(class_scope:speech.soda.chrome.SodaResponse)
   ))
 _sym_db.RegisterMessage(SodaResponse)
 
 
 DESCRIPTOR.has_options = True
 DESCRIPTOR._options = _descriptor._ParseOptions(descriptor_pb2.FileOptions(), _b('H\003P\001'))
-_SERIALIZEDSODACONFIGMSG.fields_by_name['config_file_location'].has_options = True
-_SERIALIZEDSODACONFIGMSG.fields_by_name['config_file_location']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\030\001'))
+_EXTENDEDSODACONFIGMSG.fields_by_name['config_file_location'].has_options = True
+_EXTENDEDSODACONFIGMSG.fields_by_name['config_file_location']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\030\001'))
+_EXTENDEDSODACONFIGMSG.fields_by_name['reset_on_final_result'].has_options = True
+_EXTENDEDSODACONFIGMSG.fields_by_name['reset_on_final_result']._options = _descriptor._ParseOptions(descriptor_pb2.FieldOptions(), _b('\030\001'))
 # @@protoc_insertion_point(module_scope)
