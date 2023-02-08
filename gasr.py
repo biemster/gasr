@@ -29,9 +29,10 @@ class SodaClient():
         cfg_proto.language_pack_directory = './SODAModels/'
         cfg_serialized = cfg_proto.SerializeToString()
         self.config = SodaConfig(cfg_serialized, len(cfg_serialized), callback, None)
-
+        self.sodalib.CreateExtendedSodaAsync.restype = ctypes.c_void_p
+        
     def start(self):
-        self.handle = self.sodalib.CreateExtendedSodaAsync(self.config)
+        self.handle = ctypes.c_void_p(self.sodalib.CreateExtendedSodaAsync(self.config))
         self.sodalib.ExtendedSodaStart(self.handle)
         while True:
             audio = sys.stdin.buffer.read(CHUNK_SIZE)
