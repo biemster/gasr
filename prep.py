@@ -157,13 +157,12 @@ def download(url, outname):
             for data in response.iter_content(chunk_size=4096):
                 received += len(data)
                 f.write(data)
-                progress = int((received / total_length) *bar_lenght)
-                print(f'{outname} ({total_length // 1024 // 1024}M): [{'='*progress}{' '*(bar_lenght-progress)}]', end='\r')
+                progress = int((received / total_length) *bar_length)
+                print(f'{outname} ({total_length // 1024 // 1024}M): [{'='*progress}{' '*(bar_length-progress)}]', end='\r')
         print()
 
 def extract_library(lib_base):
     subprocess.run(['7z', 'e', f'{lib_base}.img', '-so', 'root/libsoda.so', '>', f'{lib_base}.so'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
-    subprocess.run(['ln', '-s', f'{lib_base}.so', 'libsoda.so'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 def extract_model(model_name):
     subprocess.run(['7z', 'x', f'{model_name}.img', 'root'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
@@ -253,7 +252,7 @@ def setup_library(platform, release):
     if not lib_ready[2]:
         bitflip(platform, lib_base)
     if not lib_ready[3]:
-        subprocess.run(['ln', '-s', '', 'libsoda.so'])
+        subprocess.run(['ln', '-s', f'{lib_base}.so', 'libsoda.so'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 def setup_model(platform, release, language):
     model_name = model_name_full(language)
