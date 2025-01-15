@@ -5,6 +5,8 @@ import argparse
 import subprocess
 import hashlib
 
+SZIP = ['7z', '7zz'][0] # >= 17.05 with squasfs support is required. on Rpi4 use 7zz, installed with apt install 7zip
+
 PLATFORMS = {
     'hana': 'RPi4 (aarch64 Cortex-A72)',
     'octopus': 'Intel Celeron',
@@ -163,10 +165,10 @@ def download(url, outname):
 
 def extract_library(lib_base):
     with open(f'{lib_base}.so', 'wb') as f:
-        subprocess.run(['7z', 'e', f'{lib_base}.img', '-so', 'root/libsoda.so'], stdout=f)
+        subprocess.run([SZIP, 'e', f'{lib_base}.img', '-so', 'root/libsoda.so'], stdout=f)
 
 def extract_model(model_name):
-    subprocess.run(['7z', 'x', f'{model_name}.img', 'root'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    subprocess.run([SZIP, 'x', f'{model_name}.img', 'root'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
     subprocess.run(['mv', 'root', model_name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 def bitflip(platform, lib_base):
@@ -203,9 +205,10 @@ def has_library(platform, lib_base):
         has_img = True
     if os.path.exists(f'{lib_base}.so'):
         h = get_hash(f'{lib_base}.so')
-        h_fix = get_hash(f'{lib_base}_fixed.so')
         if h == LIB_HASHES[platform][0]:
             has_lib = True
+    if os.path.exists(f'{lib_base}_fixed.so'):
+        h_fix = get_hash(f'{lib_base}_fixed.so')
         if h_fix == LIB_HASHES[platform][1]:
             is_fixed = True
         if os.path.islink('libsoda.so') and get_hash('libsoda.so') == h_fix:
