@@ -18,9 +18,9 @@ LIB_HASHES = { # ['orig', 'fixed']
     'hana': ['', ''],
     'octopus': ['', ''],
     'rammus': ['', ''],
-    'hatch': ['', ''],
+    'hatch': ['de216faa85674e514949311a612514c9df6fcdb1', '6924eec1d937626d4377423e346fad3ad373f88d'],
     'volteer': ['', ''],
-    'zork': ['a455e9b02df576433f9ba13d50638375f8c5ea19', ''],
+    'zork': ['a455e9b02df576433f9ba13d50638375f8c5ea19', '83536ca8490e5c4e21f07e91d29fc4101b46718e'],
 }
 
 LEGACY_VERSION = 'df24d2'
@@ -170,8 +170,29 @@ def extract_model(model_name):
     subprocess.run(['mv', 'root', model_name], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
 
 def bitflip(platform, lib_base):
-    if not LIB_HASHES[platform][1]:
+    hex_orig = ''
+    hex_fix = ''
+    if platform == 'hana':
+        print(f'RPi4 fix just needs a single bit flip, will be implemented soon')
+    elif platform in ['hatch', 'zork']:
+        hex_orig = '4c8dbdc8feffff31f68843704c89ffe8'
+        hex_fix  = '4c8dbdc8feffffc64370ff904c89ffe8'
+
+    if hex_orig and hex_fix:
+        with open(f'{lib_base}_fixed.so', 'wb') as outf:
+            with open(f'{lib_base}.so', 'rb') as inf:
+                while True:
+                    data = inf.read(4096)
+                    if not data:
+                        break
+                    dhex = data.hex()
+                    if hex_orig in dhex:
+                        print(f'Found bug, fixing')
+                        data = bytes.fromhex(dhex.replace(hex_orig, hex_fix))
+                    outf.write(data)
+    else:
         print(f'Fixing library on platform {platform} is not implemented yet, please have a look at https://github.com/biemster/gasr/issues/24')
+        return
 
 def has_library(platform, lib_base):
     has_img = False
@@ -182,11 +203,12 @@ def has_library(platform, lib_base):
         has_img = True
     if os.path.exists(f'{lib_base}.so'):
         h = get_hash(f'{lib_base}.so')
+        h_fix = get_hash(f'{lib_base}_fixed.so')
         if h == LIB_HASHES[platform][0]:
             has_lib = True
-        if h == LIB_HASHES[platform][1]:
+        if h_fix == LIB_HASHES[platform][1]:
             is_fixed = True
-        if os.path.islink('libsoda.so') and get_hash('libsoda.so') == h:
+        if os.path.islink('libsoda.so') and get_hash('libsoda.so') == h_fix:
             has_symlink = True
 
     return has_img,has_lib,is_fixed,has_symlink
@@ -252,7 +274,9 @@ def setup_library(platform, release):
     if not lib_ready[2]:
         bitflip(platform, lib_base)
     if not lib_ready[3]:
-        subprocess.run(['ln', '-s', f'{lib_base}.so', 'libsoda.so'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+        if os.path.islink('libsoda.so'):
+            subprocess.run(['rm', 'libsoda.so'])
+        subprocess.run(['ln', '-s', f'{lib_base}_fixed.so', 'libsoda.so'])
 
 def setup_model(platform, release, language):
     model_name = model_name_full(language)
@@ -262,6 +286,8 @@ def setup_model(platform, release, language):
     if not model_ready[1]:
         extract_model(model_name)
     if not model_ready[2]:
+        if os.path.islink('SODAModels'):
+            subprocess.run(['rm', 'SODAModels'])
         subprocess.run(['ln', '-s', model_name, 'SODAModels'])
 
 def setup_linker():
