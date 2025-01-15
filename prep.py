@@ -158,7 +158,7 @@ def download(url, outname):
                 received += len(data)
                 f.write(data)
                 progress = int((received / total_length) *bar_length)
-                print(f'{outname} ({total_length // 1024 // 1024}M): [{'='*progress}{' '*(bar_length-progress)}]', end='\r')
+                print(f'{outname} ({total_length // 1024 // 1024}M): [{"="*progress}{" "*(bar_length-progress)}]', end='\r')
         print()
 
 def extract_library(lib_base):
