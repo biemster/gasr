@@ -333,7 +333,7 @@ def setup(platform, release, language):
         model_name = model_name_full(language)
         model_ready = has_model(model_name)
         if not all(model_ready):
-            setup_model(platform if platform else PLATFORMS.keys()[0], release, language)
+            setup_model(platform if platform else list(PLATFORMS.keys())[0], release, language)
         else:
             print(f'Language {language} already fully set up.')
     linker_ready = has_linker()
