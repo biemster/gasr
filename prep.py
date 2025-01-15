@@ -17,7 +17,7 @@ PLATFORMS = {
 }
 
 LIB_HASHES = { # ['orig', 'fixed']
-    'hana': ['', ''],
+    'hana': ['d6b281d4e18b415daafe9398b96c286c57716e89', '14f300aa09bfbc21fe37c25a2281dcf3210eba91'],
     'octopus': ['', ''],
     'rammus': ['', ''],
     'hatch': ['de216faa85674e514949311a612514c9df6fcdb1', '6924eec1d937626d4377423e346fad3ad373f88d'],
@@ -175,7 +175,8 @@ def bitflip(platform, lib_base):
     hex_orig = ''
     hex_fix = ''
     if platform == 'hana':
-        print(f'RPi4 fix just needs a single bit flip, will be implemented soon')
+        hex_orig = 'fa00284ff0000012d001f0'
+        hex_fix  = 'fa00284ff0010012d001f0'
     elif platform in ['hatch', 'zork']:
         hex_orig = '4c8dbdc8feffff31f68843704c89ffe8'
         hex_fix  = '4c8dbdc8feffffc64370ff904c89ffe8'
