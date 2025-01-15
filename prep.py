@@ -301,7 +301,7 @@ def setup_linker():
         if 'ld-linux' in l:
             l_split = l.split(' => ')
             if 'ld-linux' in l_split[0]:
-                linker_orig = l_split[0]
+                linker_orig = l_split[0].split(' ')[0]
                 break
     if linker_orig:
         print(f'Found linker {linker_orig}, copying it here and disabling "DT_RELR without GLIBC_ABI_DT_RELR" warning')
