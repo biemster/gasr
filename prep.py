@@ -267,6 +267,7 @@ def setup_model(platform, release, language):
 
 def setup_linker():
     linker_orig = None
+    linker_fixed = 'ld-linux.so'
     ldd_env = subprocess.check_output(['ldd', '/usr/bin/env']).decode().replace('\t','').split('\n')
     for l in ldd_env:
         if 'ld-linux' in l:
@@ -276,7 +277,7 @@ def setup_linker():
                 break
     if linker_orig:
         print(f'Found linker {linker_orig}, copying it here and disabling "DT_RELR without GLIBC_ABI_DT_RELR" warning')
-        with open('ld-linux.so', 'wb') as outf:
+        with open(linker_fixed, 'wb') as outf:
             with open(linker_orig, 'rb') as inf:
                 while True:
                     data = inf.read(4096)
@@ -287,6 +288,7 @@ def setup_linker():
                         print(f'Found "libc.so.", replacing with "xibc.so."')
                         data = bytes.fromhex(dhex.replace('libc.so.\0'.encode().hex(), 'xibc.so.\0'.encode().hex()))
                     outf.write(data)
+        subprocess.run(['chmod', '744', linker_fixed])
     else:
         print(f'Linker ld-linux not found! This is an error, please report it')
 
