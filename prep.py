@@ -5,7 +5,7 @@ import argparse
 import subprocess
 import hashlib
 
-SZIP = ['7z', '7zz'][0] # >= 17.05 with squasfs support is required. on Rpi4 use 7zz, installed with apt install 7zip
+SZIP = ['7z', '7zzs'][0] # on RPi4 use 7zzs from https://www.7-zip.org/a/7z2409-linux-arm64.tar.xz
 
 PLATFORMS = {
     'hana': 'RPi4 (aarch64 Cortex-A72)',
