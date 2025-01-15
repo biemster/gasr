@@ -20,7 +20,7 @@ LIB_HASHES = { # ['orig', 'fixed']
     'rammus': ['', ''],
     'hatch': ['', ''],
     'volteer': ['', ''],
-    'zork': ['', ''],
+    'zork': ['a455e9b02df576433f9ba13d50638375f8c5ea19', ''],
 }
 
 LEGACY_VERSION = 'df24d2'
@@ -182,10 +182,9 @@ def has_library(platform, lib_base):
         has_img = True
     if os.path.exists(f'{lib_base}.so'):
         h = get_hash(f'{lib_base}.so')
-        if h == LIB_HASHES[0]:
+        if h == LIB_HASHES[platform][0]:
             has_lib = True
-        if h == LIB_HASHES[1]:
-            has_lib = True
+        if h == LIB_HASHES[platform][1]:
             is_fixed = True
         if os.path.islink('libsoda.so') and get_hash('libsoda.so') == h:
             has_symlink = True
@@ -199,7 +198,7 @@ def has_model(model_name):
     if os.path.exists(f'{model_name}.img'):
         has_img = True
     if os.path.isdir(model_name):
-        has_img = True
+        has_dir = True
     if os.path.islink('SODAModels') and os.path.exists('SODAModels/metadata') and os.path.exists(f'{model_name}/metadata') and get_hash('SODAModels/metadata') == get_hash(f'{model_name}/metadata'):
         has_symlink = True
     return has_img,has_dir,has_symlink
@@ -301,7 +300,7 @@ def setup(platform, release, language):
         else:
             print(f'Platform {platform} already fully set up.')
     if language:
-        model_name = model_name(platform, release, language)
+        model_name = model_name_full(language)
         model_ready = has_model(model_name)
         if not all(model_ready):
             setup_model(platform if platform else PLATFORMS.keys()[0], release, language)
