@@ -27,6 +27,6 @@ If your platform is not available, please respond in https://github.com/biemster
 
 ##### Run:
 ```bash
-arecord -Dplughw:3,0 -fS16_LE -c1 -r16000 | ./ld-linux.so $(which python3) gasr.py 2>/dev/null
+arecord -Dplughw:3,0 -fS16_LE -c1 -r16000 | ./gasr.py 2>/dev/null
 ```
 where `hw:3,0` should be changed to where your microphone lives in your ALSA setup.

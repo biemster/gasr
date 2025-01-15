@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!./ld-linux.so /usr/bin/python3
 import sys
 import ctypes
 from soda_api_pb2 import ExtendedSodaConfigMsg, SodaResponse, SodaRecognitionResult
