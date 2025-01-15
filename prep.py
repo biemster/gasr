@@ -162,7 +162,8 @@ def download(url, outname):
         print()
 
 def extract_library(lib_base):
-    subprocess.run(['7z', 'e', f'{lib_base}.img', '-so', 'root/libsoda.so', '>', f'{lib_base}.so'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
+    with open(f'{lib_base}.so', 'wb') as f:
+        subprocess.run(['7z', 'e', f'{lib_base}.img', '-so', 'root/libsoda.so'], stdout=f)
 
 def extract_model(model_name):
     subprocess.run(['7z', 'x', f'{model_name}.img', 'root'], stdout=subprocess.DEVNULL, stderr=subprocess.DEVNULL)
