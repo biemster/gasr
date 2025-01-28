@@ -9,6 +9,7 @@ SZIP = ['7z', '7zzs'][0] # on RPi4 use 7zzs from https://www.7-zip.org/a/7z2409-
 
 PLATFORMS = {
     'hana': 'RPi4 (aarch64 Cortex-A72)',
+    'kukui': 'sdm845/MT8183 (aarch64 Cortex-A73/A53)',
     'octopus': 'Intel Celeron',
     'rammus': 'Intel 8th and 9th',
     'hatch': 'Intel 10th gen',
@@ -18,6 +19,7 @@ PLATFORMS = {
 
 LIB_HASHES = { # ['orig', 'fixed']
     'hana': ['d6b281d4e18b415daafe9398b96c286c57716e89', '14f300aa09bfbc21fe37c25a2281dcf3210eba91'],
+    'kukui': ['c84128a5e48e9cc0a238f683db17931b26693c5f', '539f49a174fe8be31218367be3d33e8078c569f6'],
     'octopus': ['', ''],
     'rammus': ['', ''],
     'hatch': ['de216faa85674e514949311a612514c9df6fcdb1', '6924eec1d937626d4377423e346fad3ad373f88d'],
@@ -177,6 +179,9 @@ def bitflip(platform, lib_base):
     if platform == 'hana':
         hex_orig = 'fa00284ff0000012d001f0'
         hex_fix  = 'fa00284ff0010012d001f0'
+    elif platform == 'kukui':
+        hex_orig = '02000014e8031f2ae0030491'
+        hex_fix  = '0200001428008052e0030491'
     elif platform in ['hatch', 'zork']:
         hex_orig = '4c8dbdc8feffff31f68843704c89ffe8'
         hex_fix  = '4c8dbdc8feffffc64370ff904c89ffe8'
